@@ -81,6 +81,9 @@ RUN sed -i '/^TIZEN_SDK_DATA_PATH/d' $TIZEN_SDK_ROOT/sdk.info \
     && ln -sf /home/$USERNAME/.tizen-cli-config $TIZEN_SDK_ROOT/tools/.tizen-cli-config \
     && : # last line
 
+RUN usermod -aG dialout ${USERNAME}
+RUN usermod -aG plugdev ${USERNAME}    
+
 ENV TIZEN_ROOTFS /tizen_rootfs
 
 # Fast Model GDB plugins path for debugging support

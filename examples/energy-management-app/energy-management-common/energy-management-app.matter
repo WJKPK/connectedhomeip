@@ -2500,6 +2500,7 @@ endpoint 0 {
   server cluster NetworkCommissioning {
     ram      attribute maxNetworks;
     callback attribute networks;
+    ram      attribute connectMaxTimeSeconds default = 30;
     ram      attribute interfaceEnabled;
     ram      attribute lastNetworkingStatus;
     ram      attribute lastNetworkID;
@@ -2728,6 +2729,8 @@ endpoint 1 {
     callback attribute nextChargeRequiredEnergy;
     callback attribute nextChargeTargetSoC;
     callback attribute approximateEVEfficiency;
+    callback attribute stateOfCharge;
+    callback attribute batteryCapacity;
     callback attribute sessionID;
     callback attribute sessionDuration;
     callback attribute sessionEnergyCharged;

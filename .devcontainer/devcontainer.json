@@ -7,18 +7,27 @@
         "--network=host",
         "--privileged",
         "-v",
-        "/dev/bus/usb:/dev/bus/usb:ro",
+        "/dev/bus/usb:/dev/bus/usb",
         "--device-cgroup-rule=a 189:* rmw",
         "--add-host=host.docker.internal:host-gateway"
     ],
     "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+        "source=${localEnv:HOME}/.bashrc,target=/home/vscode/.bashrc,type=bind",
+        "source=/dev/,target=/dev/,type=bind",
+        "source=/etc/udev/rules.d/,target=/etc/udev/rules.d/,type=bind",
+        "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,ro",
+        "type=bind,source=/run/dbus,target=/run/dbus",
+        "type=bind,source=/tmp/.X11-unix,target=/tmp/.X11-unix",
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
     "initializeCommand": "bash .devcontainer/build.sh --tag matter-dev-environment:local --version 74",
     "image": "matter-dev-environment:local",
     "remoteUser": "vscode",
     "containerEnv": {
-        "PW_ENVIRONMENT_ROOT": "${containerWorkspaceFolder}/.environment-vscode"
+        "PW_ENVIRONMENT_ROOT": "${containerWorkspaceFolder}/.environment-vscode",
+        "DISPLAY": "${localEnv:DISPLAY}",
+        "DBUS_SESSION_BUS_ADDRESS": "${localEnv:DBUS_SESSION_BUS_ADDRESS}"
     },
     "customizations": {
         "vscode": {
